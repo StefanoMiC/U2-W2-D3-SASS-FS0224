@@ -1,16 +1,45 @@
 @charset "UTF-8";
-body {
-  font-family: "Arial", "Helvetica", sans-serif;
-  color: rgb(28, 27, 29);
-  font-weight: 300;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-main h2 {
+body {
+  margin: 0;
+}
+
+.btn-2, .btn-1 {
+  padding: 0.25rem 0.75rem;
+  border: 2px solid black;
+  border-radius: 6px;
+}
+
+body {
+  font-family: "Arial", "Helvetica", sans-serif;
+  font-weight: 300;
+  color: rgb(28, 27, 29);
+}
+
+.hero {
+  min-height: 40vh;
   background-color: cyan;
+  background-image: url(https://images.unsplash.com/photo-1705433505174-b8ea6227bc6f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  background-size: cover;
+  background-position: center;
 }
 
 main {
   padding: 1rem;
+}
+main h2 {
+  background-color: cyan;
+}
+@media screen and (min-width: 992px) {
+  main h2 {
+    font-size: 64px;
+    text-decoration: underline;
+  }
 }
 main > section {
   border: 3px solid palegreen;
@@ -36,6 +65,9 @@ main .area-1:active {
 }
 main .area-2 img {
   max-width: 100%;
+  max-height: 250px;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .button {
@@ -55,4 +87,180 @@ main .area-2 img {
 .button--primary__span:hover {
   background-color: white;
   color: rgb(28, 27, 29);
+}
+
+article {
+  counter-increment: articleCounter;
+}
+article h3::before {
+  content: counter(articleCounter) ") ";
+}
+
+.main-title, .main-title-alt {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-size: 64px;
+  letter-spacing: -2px;
+  line-height: 1;
+  color: cyan;
+  background-color: rgb(28, 27, 29);
+}
+
+.main-title-alt {
+  font-size: 48px;
+  letter-spacing: -1px;
+  border-left: 6px solid cyan;
+  padding-left: 10px;
+}
+
+.btn-1 {
+  background-color: #bfffff;
+  color: #006666;
+  border-color: cyan;
+}
+
+.btn-2 {
+  background-color: palegoldenrod;
+  color: rgb(111, 81, 5);
+  border-color: #da9620;
+}
+
+.box-1 {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  vertical-align: bottom;
+  border: 2px solid coral;
+  padding: 1rem;
+  color: #b36a50;
+  background-color: #ffccb9;
+  border-radius: 20px;
+}
+
+.box-2 {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  vertical-align: bottom;
+  border: 2px solid aqua;
+  padding: 3rem;
+  color: #00b3b3;
+  background-color: #99ffff;
+  border-radius: 10px;
+}
+
+.box-3 {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  vertical-align: bottom;
+  border: 2px solid black;
+  padding: 1rem;
+  color: black;
+  background-color: #999999;
+  border-radius: 30px;
+}
+
+.box-4 {
+  width: 250px;
+  height: 250px;
+  background-color: antiquewhite;
+  display: inline-flex;
+  vertical-align: bottom;
+  align-items: center;
+  justify-content: center;
+}
+
+.box-5 {
+  width: 250px;
+  height: 250px;
+  background-image: url(https://images.unsplash.com/photo-1711699487023-a5b25f3e7e66?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+  display: inline-flex;
+  vertical-align: bottom;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.custom-ps-1 {
+  padding-inline-start: 10px;
+}
+
+.custom-ps-2 {
+  padding-inline-start: 20px;
+}
+
+.custom-ps-3 {
+  padding-inline-start: 30px;
+}
+
+.custom-ps-4 {
+  padding-inline-start: 40px;
+}
+
+.custom-ps-5 {
+  padding-inline-start: 50px;
+}
+
+.box-red {
+  background-color: #ff0000;
+}
+
+.box-green {
+  background-color: #008000;
+}
+
+.box-blue {
+  background-color: #0000ff;
+}
+
+.box-yellow {
+  background-color: #ffff00;
+}
+
+.box-purple {
+  background-color: #800080;
+}
+
+.box-orange {
+  background-color: #ffa500;
+}
+
+.padding-inline-xs {
+  padding-inline: 10px;
+}
+
+.padding-block-xs {
+  padding-block: 10px;
+}
+
+.padding-inline-sm {
+  padding-inline: 20px;
+}
+
+.padding-block-sm {
+  padding-block: 20px;
+}
+
+.padding-inline-md {
+  padding-inline: 30px;
+}
+
+.padding-block-md {
+  padding-block: 30px;
+}
+
+.padding-inline-lg {
+  padding-inline: 50px;
+}
+
+.padding-block-lg {
+  padding-block: 50px;
+}
+
+.padding-inline-xl {
+  padding-inline: 100px;
+}
+
+.padding-block-xl {
+  padding-block: 100px;
 }/*# sourceMappingURL=style.css.map */

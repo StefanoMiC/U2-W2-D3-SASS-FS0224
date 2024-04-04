@@ -1,0 +1,28 @@
+@mixin customBox($color: black, $radius: 0, $padding: 1rem) {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  vertical-align: bottom;
+  border: 2px solid $color;
+  padding: $padding;
+  color: scale-color($color, $blackness: 30%);
+  background-color: scale-color($color, $lightness: 60%);
+  border-radius: $radius;
+}
+
+@mixin dynamicBox($size, $property, $val) {
+  width: $size;
+  height: $size;
+  background-#{$property}: $val;
+  display: inline-flex;
+  vertical-align: bottom;
+
+  @if ($property == "image") {
+    background-size: cover;
+    background-position: center;
+    color: white;
+  } @else {
+    align-items: center;
+    justify-content: center;
+  }
+}

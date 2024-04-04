@@ -1,0 +1,241 @@
+// 1) VARIABILI SASS
+$main-color: cyan;
+$secondary-color: palegreen;
+$body-color: rgb(28, 27, 29);
+$sans-serif: "Arial", "Helvetica", sans-serif;
+$heading-font: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+$margin-0: 0;
+$margin-1: 0.25rem;
+$margin-2: 0.5rem;
+$margin-3: 1rem;
+$margin-4: 2rem;
+$margin-5: 3rem;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  //   modalità di applicazione di sotto-proprietà in forma abbreviata
+  font: {
+    family: $sans-serif;
+    weight: 300;
+  }
+  color: $body-color;
+}
+
+// main {
+//   padding: 1rem;
+// }
+
+// main > section {
+//   border: 1px solid $secondary-color;
+// }
+
+// main > section > div > ul {
+//   list-style: none;
+//   padding-inline-start: 0;
+// }
+
+// 2) NESTING (o annidamento) dei selettori CSS
+
+.hero {
+  min-height: 40vh;
+
+  //   modalità di applicazione di sotto-proprietà in forma abbreviata
+  background: {
+    color: $main-color;
+    image: url(https://images.unsplash.com/photo-1705433505174-b8ea6227bc6f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+    size: cover;
+    position: center;
+  }
+}
+
+main {
+  padding: 1rem;
+
+  h2 {
+    background-color: $main-color;
+
+    // media query annidata, permette di non rispecificare il selettore, ma bisogna premurarsi di scriverla sotto tutte le altre proprietà applicate al selettore
+    @media screen and (min-width: 992px) {
+      font-size: 64px;
+      text-decoration: underline;
+    }
+  }
+
+  > section {
+    border: 3px solid $secondary-color;
+
+    > div {
+      border: 3px solid red;
+
+      > ul {
+        list-style: none;
+        padding-inline-start: 0;
+      }
+    }
+  }
+
+  ul {
+    &:not(section ul) {
+      li {
+        &::marker {
+          content: "🚀";
+        }
+      }
+    }
+  }
+
+  .area-1 {
+    background-color: $main-color;
+
+    // parent selector, riprende tutto un selettore del genitore
+    &:hover {
+      background-color: $secondary-color;
+    }
+
+    &:active {
+      background-color: crimson;
+    }
+  }
+
+  .area-2 {
+    img {
+      max-width: 100%;
+      max-height: 250px;
+      object-fit: cover;
+    }
+  }
+}
+
+.button {
+  background-color: transparent;
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-size: 1rem;
+
+  &--primary {
+    background-color: $main-color;
+    color: $body-color;
+
+    &__span {
+      background-color: black;
+      color: white;
+
+      &:hover {
+        background-color: white;
+        color: $body-color;
+      }
+    }
+  }
+}
+
+article {
+  counter-increment: articleCounter;
+
+  h3 {
+    &::before {
+      content: counter(articleCounter) ") ";
+    }
+  }
+}
+
+.main-title {
+  font: {
+    family: $heading-font;
+    size: 64px;
+  }
+  letter-spacing: -2px;
+  line-height: 1;
+  color: $main-color;
+  background-color: $body-color;
+}
+
+// 3) EXTEND (@extend) - questa keyword è in grado di prendere un intero blocco di CSS già specificato da
+// un altro selettore id/classe/tag definito in precedenza
+
+.main-title-alt {
+  @extend .main-title;
+  font-size: 48px;
+  letter-spacing: -1px;
+  border-left: 6px solid $main-color;
+  padding-left: 10px;
+}
+
+// 4) PLACEHOLDER (%nomePlaceholder) - questa modalità di creazione di un selettore ci servirà a creare un blocco CSS che non esisterà a meno che
+// non venga UTILIZZATO all'interno di un selettore normale. Rispetto ad estendere elementi esistenti sarà un blocco che esisterà solo nel momento in cui è utilizzato.
+
+%main-btn {
+  padding: 0.25rem 0.75rem;
+  border: 2px solid black;
+  border-radius: 6px;
+}
+
+.btn-1 {
+  @extend %main-btn;
+  background-color: scale-color($main-color, $lightness: 75%);
+  color: scale-color($main-color, $blackness: 60%);
+  border-color: $main-color;
+}
+
+.btn-2 {
+  @extend %main-btn;
+  background-color: palegoldenrod;
+  color: rgb(111, 81, 5);
+  border-color: adjust-hue(goldenrod, -5deg);
+}
+
+//5) MIXIN (@mixin) - blocco di codice CSS che può generarsi anche a partire da valori dinamici (o parametrici)
+
+@mixin customBox($color: black, $radius: 0, $padding: 1rem) {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+  vertical-align: bottom;
+  border: 2px solid $color;
+  padding: $padding;
+  color: scale-color($color, $blackness: 30%);
+  background-color: scale-color($color, $lightness: 60%);
+  border-radius: $radius;
+}
+
+.box-1 {
+  @include customBox(coral, 20px);
+}
+.box-2 {
+  @include customBox(aqua, 10px, 3rem);
+}
+
+// con quest'altra sintassi valorizzeremo solamente un parametro specifico tramite il suo nome,
+// negli altri casi bisogna mantenere l'ordine dei valori passati che rispecchi la loro definizione come parametro nel mixin
+.box-3 {
+  @include customBox($radius: 30px);
+}
+
+// 6) INTERPOLAZIONE DI VALORE #{} - ricorda molto l'interpolazione delle template string in JavaScript
+@mixin dynamicBox($size, $property, $val) {
+  width: $size;
+  height: $size;
+  background-#{$property}: $val;
+  display: inline-flex;
+  vertical-align: bottom;
+
+  @if ($property == "image") {
+    background-size: cover;
+    background-position: center;
+    color: white;
+  } @else {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.box-4 {
+  @include dynamicBox(250px, "color", antiquewhite);
+}
+
+.box-5 {
+  @include dynamicBox(250px, "image", url(https://images.unsplash.com/photo-1711699487023-a5b25f3e7e66?q=80&w=2030&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D));
+}
